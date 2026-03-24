@@ -1,0 +1,126 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "stm: stop running instances",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$processes = @(Get-Process -Name SystemTrayMenu -ErrorAction SilentlyContinue); foreach ($process in $processes) { Stop-Process -Id $process.Id -Force }; exit 0"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared",
+        "clear": false
+      }
+    },
+    {
+      "label": "stm: restore",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "restore",
+        "${workspaceFolder}/SystemTrayMenu.csproj"
+      ],
+      "problemMatcher": "$msCompile",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "stm: clean Debug",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "clean",
+        "${workspaceFolder}/SystemTrayMenu.csproj",
+        "-c",
+        "Debug"
+      ],
+      "problemMatcher": "$msCompile",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": false
+      }
+    },
+    {
+      "label": "stm: build Debug",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/SystemTrayMenu.csproj",
+        "-c",
+        "Debug"
+      ],
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "stm: stop running instances",
+        "stm: restore"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$msCompile",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": false
+      }
+    },
+    {
+      "label": "stm: rebuild Debug",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/SystemTrayMenu.csproj",
+        "-c",
+        "Debug"
+      ],
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "stm: stop running instances",
+        "stm: restore",
+        "stm: clean Debug"
+      ],
+      "problemMatcher": "$msCompile",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": false
+      }
+    },
+    {
+      "label": "stm: run Debug",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$env:STM_DEBUG_ALLOW_MULTI_INSTANCE='1'; & \"${workspaceFolder}/bin/AnyCPU/Debug/net10.0-windows10.0.22000.0/win-x64/SystemTrayMenu.exe\""
+      ],
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "stm: build Debug"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": false
+      }
+    }
+  ]
+}

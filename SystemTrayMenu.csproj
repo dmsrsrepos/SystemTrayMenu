@@ -2,11 +2,11 @@
   <!-- Global project settings -->
   <PropertyGroup>
     <!-- https://learn.microsoft.com/en-us/dotnet/standard/frameworks -->
-    <!--<TargetFrameworks>net7.0-windows10.0.22000.0;net7.0</TargetFrameworks>-->
-    <TargetFrameworks>net7.0-windows10.0.22000.0</TargetFrameworks>
+    <!--<TargetFrameworks>net10.0-windows10.0.22000.0;net10.0</TargetFrameworks>-->
+    <TargetFrameworks>net10.0-windows10.0.22000.0</TargetFrameworks>
     <!-- https://docs.microsoft.com/en-us/dotnet/core/rid-catalog -->
-    <RuntimeIdentifier Condition=" '$(TargetFramework)' == 'net7.0-windows10.0.22000.0' ">win-x64</RuntimeIdentifier>
-    <RuntimeIdentifier Condition=" '$(TargetFramework)' == 'net7.0' ">linux-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition=" '$(TargetFramework)' == 'net10.0-windows10.0.22000.0' ">win-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition=" '$(TargetFramework)' == 'net10.0' ">linux-x64</RuntimeIdentifier>
     <UseWPF Condition=" '$(RuntimeIdentifier)' == 'win-x64' ">True</UseWPF>
     <Nullable>enable</Nullable>
     <SelfContained>true</SelfContained>
@@ -88,7 +88,7 @@ EXIT 0</PreBuildEvent>
   </ItemGroup>
   <!-- References NuGet -->
   <ItemGroup Condition=" '$(RuntimeIdentifier)' == 'win-x64' ">
-    <FrameworkReference Update="Microsoft.WindowsDesktop.App;Microsoft.WindowsDesktop.App.WPF" TargetingPackVersion="7.0.0" />
+    <FrameworkReference Update="Microsoft.WindowsDesktop.App;Microsoft.WindowsDesktop.App.WPF" TargetingPackVersion="10.0.0" />
     <PackageReference Include="H.NotifyIcon" Version="2.0.118" />
     <PackageReference Include="HidSharp" Version="2.1.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0-preview1.23165.1">
@@ -106,24 +106,4 @@ EXIT 0</PreBuildEvent>
     </Reference>
   </ItemGroup>
   <!-- References Native -->
-  <ItemGroup Condition=" '$(RuntimeIdentifier)' == 'win-x64' ">
-    <COMReference Include="IWshRuntimeLibrary">
-      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Shell32">
-      <Guid>{50A7E9B0-70EF-11D1-B75A-00A0C90564FE}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-  </ItemGroup>
 </Project>
