@@ -1,5 +1,5 @@
 {
-  "dotnet.defaultSolution": "SystemTrayMenu.sln",
+  "dotnet.defaultSolution": "SystemTrayMenu.slnx",
   "debug.internalConsoleOptions": "neverOpen",
   "omnisharp.enableRoslynAnalyzers": true,
   "omnisharp.enableEditorConfigSupport": true,

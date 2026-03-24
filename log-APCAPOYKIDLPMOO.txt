@@ -1,0 +1,2 @@
+2026/03/24 15:41:48.470 2  INFO Skip single instance check for debug session
+2026/03/24 15:41:48.706 2  INFO Application Start SystemTrayMenu.dll | 2.0.0.0 | ScalingFactor=1

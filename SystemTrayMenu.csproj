@@ -2,12 +2,10 @@
   <!-- Global project settings -->
   <PropertyGroup>
     <!-- https://learn.microsoft.com/en-us/dotnet/standard/frameworks -->
-    <!--<TargetFrameworks>net10.0-windows10.0.22000.0;net10.0</TargetFrameworks>-->
-    <TargetFrameworks>net10.0-windows10.0.22000.0</TargetFrameworks>
+    <TargetFramework>net10.0-windows10.0.22000.0</TargetFramework>
     <!-- https://docs.microsoft.com/en-us/dotnet/core/rid-catalog -->
-    <RuntimeIdentifier Condition=" '$(TargetFramework)' == 'net10.0-windows10.0.22000.0' ">win-x64</RuntimeIdentifier>
-    <RuntimeIdentifier Condition=" '$(TargetFramework)' == 'net10.0' ">linux-x64</RuntimeIdentifier>
-    <UseWPF Condition=" '$(RuntimeIdentifier)' == 'win-x64' ">True</UseWPF>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <SelfContained>true</SelfContained>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
@@ -35,7 +33,6 @@ EXIT 0</PreBuildEvent>
     <PackageIcon>icon.png</PackageIcon>
     <PackageProjectUrl>hofknecht.eu/systemtraymenu/</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <RepositoryType></RepositoryType>
     <PackageTags>SystemTrayMenu</PackageTags>
     <SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -87,8 +84,7 @@ EXIT 0</PreBuildEvent>
     </None>
   </ItemGroup>
   <!-- References NuGet -->
-  <ItemGroup Condition=" '$(RuntimeIdentifier)' == 'win-x64' ">
-    <FrameworkReference Update="Microsoft.WindowsDesktop.App;Microsoft.WindowsDesktop.App.WPF" TargetingPackVersion="10.0.0" />
+  <ItemGroup>
     <PackageReference Include="H.NotifyIcon" Version="2.0.118" />
     <PackageReference Include="HidSharp" Version="2.1.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0-preview1.23165.1">
