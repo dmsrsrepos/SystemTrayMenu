@@ -12,12 +12,7 @@
         "-Command",
         "$processes = @(Get-Process -Name SystemTrayMenu -ErrorAction SilentlyContinue); foreach ($process in $processes) { Stop-Process -Id $process.Id -Force }; exit 0"
       ],
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "never",
-        "panel": "shared",
-        "clear": false
-      }
+      "problemMatcher": []
     },
     {
       "label": "stm: restore",
@@ -27,29 +22,7 @@
         "restore",
         "${workspaceFolder}/SystemTrayMenu.csproj"
       ],
-      "problemMatcher": "$msCompile",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared",
-        "clear": true
-      }
-    },
-    {
-      "label": "stm: clean Debug",
-      "type": "shell",
-      "command": "dotnet",
-      "args": [
-        "clean",
-        "${workspaceFolder}/SystemTrayMenu.csproj",
-        "-c",
-        "Debug"
-      ],
-      "problemMatcher": "$msCompile",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared",
-        "clear": false
-      }
+      "problemMatcher": "$msCompile"
     },
     {
       "label": "stm: build Debug",
@@ -70,38 +43,10 @@
         "kind": "build",
         "isDefault": true
       },
-      "problemMatcher": "$msCompile",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared",
-        "clear": false
-      }
+      "problemMatcher": "$msCompile"
     },
     {
-      "label": "stm: rebuild Debug",
-      "type": "shell",
-      "command": "dotnet",
-      "args": [
-        "build",
-        "${workspaceFolder}/SystemTrayMenu.csproj",
-        "-c",
-        "Debug"
-      ],
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "stm: stop running instances",
-        "stm: restore",
-        "stm: clean Debug"
-      ],
-      "problemMatcher": "$msCompile",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared",
-        "clear": false
-      }
-    },
-    {
-      "label": "stm: run Debug",
+      "label": "stm: watch run (Hot Reload)",
       "type": "shell",
       "command": "pwsh",
       "args": [
@@ -109,18 +54,53 @@
         "-ExecutionPolicy",
         "Bypass",
         "-Command",
-        "$env:STM_DEBUG_ALLOW_MULTI_INSTANCE='1'; & \"${workspaceFolder}/bin/AnyCPU/Debug/net10.0-windows10.0.22000.0/win-x64/SystemTrayMenu.exe\""
+        "$env:STM_DEBUG_ALLOW_MULTI_INSTANCE='1'; dotnet watch --project \"${workspaceFolder}/SystemTrayMenu.csproj\" run -c Debug"
       ],
       "dependsOrder": "sequence",
       "dependsOn": [
-        "stm: build Debug"
+        "stm: stop running instances",
+        "stm: restore"
       ],
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared",
-        "clear": false
-      }
+      "isBackground": true,
+      "group": "none",
+      "problemMatcher": [
+        {
+          "owner": "dotnet-watch",
+          "fileLocation": "absolute",
+          "pattern": [
+            {
+              "regexp": "^(.*)\\((\\d+),(\\d+)\\):\\s*(error|warning)\\s*([A-Z]+\\d+):\\s*(.*)$",
+              "file": 1,
+              "line": 2,
+              "column": 3,
+              "severity": 4,
+              "code": 5,
+              "message": 6
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".*dotnet watch.*",
+            "endsPattern": ".*(Hot reload enabled|Watching for file changes).*"
+          }
+        }
+      ]
+    },
+    {
+      "label": "stm: watch test",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "watch",
+        "--project",
+        "${workspaceFolder}/SystemTrayMenu.csproj",
+        "test",
+        "-c",
+        "Debug"
+      ],
+      "isBackground": true,
+      "group": "test",
+      "problemMatcher": "$msCompile"
     }
   ]
 }
