@@ -85,9 +85,9 @@ EXIT 0</PreBuildEvent>
   </ItemGroup>
   <!-- References NuGet -->
   <ItemGroup>
-    <PackageReference Include="H.NotifyIcon" Version="2.0.118" />
-    <PackageReference Include="HidSharp" Version="2.1.0" />
-    <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.1" />
+    <PackageReference Include="H.NotifyIcon" Version="2.4.1" />
+    <PackageReference Include="HidSharp" Version="2.6.4" />
+    <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.2.2" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.507">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
